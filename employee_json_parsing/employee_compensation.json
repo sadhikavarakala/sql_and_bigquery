@@ -1,0 +1,42 @@
+[
+    {
+        "POSITION": "DATA ANALYST",
+        "SCHOOL": "CLARK ATLANTA UNIVERSITY",
+        "MAJOR": "COMPUTER SCIENCE",
+        "COMPENSATION": {
+            "SALARY": 83595.09,
+            "BONUS": 5000.00,
+            "VACATION": 20
+        }
+    },
+    {
+        "POSITION": "FINANCIAL ANALYST",
+        "SCHOOL": "GEORGIA INSTITUTE OF TECHNOLOGY",
+        "MAJOR": "MBA",
+        "COMPENSATION": {
+            "SALARY": 119143.09,
+            "BONUS": 10000.00,
+            "VACATION": 10
+        }
+    },
+    {
+        "POSITION": "REPORTING ANALYST",
+        "SCHOOL": "SYRACUSE UNIVERSITY",
+        "MAJOR": "INFORMATION MANAGEMENT",
+        "COMPENSATION": {
+            "SALARY": 121231.51,
+            "BONUS": 0.00,
+            "VACATION": 20
+        }
+    },
+    {
+        "POSITION": "ANALYTICS MANAGER",
+        "SCHOOL": "GEORGIA INSTITUTE OF TECHNOLOGY",
+        "MAJOR": "MBA",
+        "COMPENSATION": {
+            "SALARY": 300000.51,
+            "BONUS": 50000.00,
+            "VACATION": 25
+        }
+    }
+]

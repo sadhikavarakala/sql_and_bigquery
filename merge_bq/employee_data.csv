@@ -1,0 +1,11 @@
+empid,name,department,salary,status
+001,Alice Johnson,Engineering,1000,Active
+002,Bob Smith,Marketing,65000,Inactive
+003,Charlie Davis,Finance,72000,Active
+004,Diana Patel,Engineering,90000,Active
+005,Eric Lee,Human Resources,58000,Inactive
+006,Fiona Garcia,Marketing,67000,Active
+007,George Brown,Engineering,88000,Active
+008,Hannah Wilson,Finance,71000,Inactive
+009,Ian Martinez,Human Resources,60000,Active
+010,Julia Chen,Engineering,99000,Active
