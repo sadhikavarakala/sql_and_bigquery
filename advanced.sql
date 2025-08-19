@@ -13,8 +13,8 @@ INSERT INTO sales (dt, num_sales) VALUES
 SELECT * FROM sales;
 
 -- generating series of dates - UNION And UNION ALL -- 
-UNION - duplicated values will be removed - will stack all values and remove duplicate 
-UNION ALL - duplicate values are retained
+-- UNION - duplicated values will be removed - will stack all values and remove duplicate 
+-- UNION ALL - duplicate values are retained
 
 SELECT '2025-01-01' AS dt
 UNION ALL
