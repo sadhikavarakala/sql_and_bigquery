@@ -131,3 +131,85 @@ SELECT
 FROM employees 
 WHERE manager_id IS NULL
 
+-- subqueries:
+-- Employees who earn more than dept avg
+SELECT 
+	e.first_name,
+	e.last_name,
+	e.salary,
+	d.department_name
+FROM employees e 
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.salary > (
+	SELECT avg(salary)
+	FROM employees
+	WHERE department_id = e.department_id
+)
+ORDER BY d.department_name, e.salary DESC;
+
+-- list departments with no employees(NOT EXISTS)
+SELECT d.department_name
+FROM departments d
+WHERE NOT EXISTS (
+	SELECT 1
+	FROM employees e
+	WHERE e.department_id = d.department_id
+);
+
+-- Index:
+CREATE INDEX idx_employees_lastname ON employees(last_name);
+
+--Case Statement
+--Salary Category for Employees
+SELECT
+	first_name,
+	last_name,
+	salary,
+	CASE 
+		WHEN salary >= 15000 THEN 'High'
+		WHEN salary >= 8000 THEN 'Medium'
+		ELSE 'Low'
+	END AS salary_category
+FROM employees
+ORDER BY salary DESC;
+
+-- Trigger
+-- creating a logging table
+CREATE TABLE salary_changes (
+	log_id SERIAL PRIMARY KEY,
+	employee_id INT,
+	old_salary NUMERIC(8, 2),
+	new_salary NUMERIC(8, 2),
+	changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Trigger function
+CREATE OR REPLACE FUNCTION log_salary_change()
+RETURNS TRIGGER AS $$
+BEGIN
+	IF NEW.salary <> OLD.salary THEN
+		INSERT INTO salary_changes(employee_id, old_salary, new_salary)
+		VALUES (NEW.employee_id, OLD.salary, NEW.salary);
+	END IF;
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- trigger
+CREATE TRIGGER trg_salary_update
+AFTER UPDATE OF salary ON employees
+FOR EACH ROW
+EXECUTE FUNCTION log_salary_change();
+
+-- Stored procedures / functions 
+-- 1. Give 10% raise to all employees in a department
+CREATE OR REPLACE FUNCTION give_raise(dept_id INT, pct DECIMAL)
+RETURNS VOID AS $$
+BEGIN
+	UPDATE employees
+	SET salary = salary * (1 + pct)
+	WHERE department_id = dept_id;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT give_raise(10, 0.10);

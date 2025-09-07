@@ -68,3 +68,23 @@ SELECT *
 FROM emp_with_dept_avg
 WHERE salary > dept_avg_salary
 ORDER BY department_name, salary DESC;
+
+-- LEAD() / LAG() - 1. Show each employee's salary, and the next highest salary in their department
+SELECT
+	first_name, 
+	last_name,
+	department_id,
+	salary,
+	LEAD(salary) OVER (PARTITION BY department_id ORDER BY salary DESC) AS next_highest_salary
+FROM employees
+ORDER BY department_id, salary DESC;
+
+-- 2. Show each employee's salary and the previous lower salary in their department
+SELECT
+	first_name,
+	last_name,
+	department_id,
+	salary,
+	LAG(salary) OVER (PARTITION BY department_id ORDER BY salary DESC) AS previous_lowest_salary
+FROM employees
+ORDER BY department_id, salary DESC
